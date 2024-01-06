@@ -1,0 +1,50 @@
+#include<stdio.h>
+
+// Function to check if a number is even
+int isEven(int num) {
+    return num % 2 == 0 ? 1 : 0; // Returns 1 if num is even, otherwise returns 0
+}
+
+// Function to check if a number is prime
+int isPrime(int num) {
+    if (num < 2) return 0; // Numbers less than 2 are not prime
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            return 0; // Not a prime number
+        }
+    }
+    return 1; // Number is prime
+}
+
+// Function to ask whether to continue or exit
+int askContinue() {
+    int choice;
+    printf("Do you want to continue? (1 = Yes, 0 = No): ");
+    scanf_s("%d", &choice);
+    return choice;
+}
+
+int main() {
+    int number, continueChoice; // Declaration of variables
+
+    do {
+        printf("Enter a number: \n");
+        scanf_s("%d", &number); // Input from user
+
+        if (!isEven(number)) { // Check if the entered number is not even
+            printf("The number is not even.\n");
+        } else {
+            for (int j = 2; j <= number / 2; j++) {
+                int sum = number - j;
+
+                if (isPrime(j) && isPrime(sum)) { // Check if both 'j' and 'sum' are prime
+                    printf("%d + %d = %d \n", j, sum, number); // Print the pair of primes
+                }
+            }
+        }
+
+        continueChoice = askContinue(); // Ask user whether to continue or exit
+    } while (continueChoice != 0); // Continue loop until user chooses to exit (continueChoice = 0)
+
+    return 0;
+}
